@@ -1,0 +1,33 @@
+{% extends 'Main/header.html' %}
+
+{% block content %}
+<div class="container">
+<div class="valign-wrapper">
+{% if user.is_authenticated %}
+<div class="row">
+      <div class="col s12"><H1>Welcome!</H1></div>
+      <div class="col s12"><form method = "post" enctype="multipart/form-data"> 
+              {% csrf_token %} 
+              {{ form.as_p }} 
+              <label for="file" class="custom-file-upload">
+              </label>
+              <input class="btn waves-effect waves-light" type="file" name="file" id="file">
+              <button class="btn waves-effect waves-light" type="submit">Upload</button>
+          </form> 
+      </div>
+      {% if output %}
+      <div class="col s12">
+          {% load static %}
+          <img class="materialboxed" width="600" src="{% static "tmp/img.jpg" %}"/>
+
+          <H3>It is {{result}}</H3>
+      {% endif %}
+</div>
+</div>
+
+{% else %}
+    <h1>Login to test</h1>
+{% endif %}
+</div>
+</div>
+{% endblock %}

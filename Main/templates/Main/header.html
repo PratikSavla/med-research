@@ -1,0 +1,41 @@
+
+
+<head>
+	 {% load static %}
+            <link rel="stylesheet" href="{% static "main/css/header.css" %}">
+    <!-- Compiled and minified CSS -->
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+           
+
+</head>
+
+
+<body class="body teal accent-1">
+
+  <nav>
+    <div class="nav-wrapper  teal darken-3">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {% include 'Main/includes/navbaritems.html' %}
+      </ul>
+    </div>
+  </nav>
+
+  {% include 'Main/includes/messaging.html' %}
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+  <footer class="page-footer teal darken-2">
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright Pratik Savla
+            <a class="grey-text text-lighten-4 right" href="#srmist.edu.in">Learn more</a>
+            </div>
+          </div>
+        </footer>
