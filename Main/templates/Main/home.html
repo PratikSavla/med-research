@@ -5,28 +5,37 @@
 <div class="valign-wrapper">
 {% if user.is_authenticated %}
 <div class="row">
-      <div class="col s12"><H1>Welcome!</H1></div>
-      <div class="col s12"><form method = "post" enctype="multipart/form-data"> 
+      <div class="col s12"><H2>MedScope</H2></div>
+    <div class="col s12"><form method = "post" enctype="multipart/form-data"> 
               {% csrf_token %} 
               {{ form.as_p }} 
               <label for="file" class="custom-file-upload">
               </label>
-              <input class="btn waves-effect waves-light" type="file" name="file" id="file">
-              <button class="btn waves-effect waves-light" type="submit">Upload</button>
+              <input class="btn waves-effect waves-light black" type="file" name="file" id="file">
+              <button class="btn waves-effect waves-light black" type="submit">Upload</button>
           </form> 
       </div>
       {% if output %}
       <div class="col s12">
           {% load static %}
-          <img class="materialboxed" width="600" src="{% static "tmp/img.jpg" %}"/>
+          <img class="materialboxed" width="600" src="{% static 'tmp/img.jpg' %}"/>
 
-          <H3>It is {{result}}</H3>
+          <H3>Output: {{result}}</H3>
+          <H3>Accuracy: {{acc}}%</H3>
       {% endif %}
 </div>
 </div>
 
 {% else %}
-    <h1>Login to test</h1>
+<title>Vision Sense</title>
+<section class="hero is-primary is-bold is-medium black-text">
+          <br>
+          <H2 class="title is-2">MedScope</H2>
+          <H4><i>Simple example for Image Processing</i></H4>
+          <H4>&#x2022 Encrypted user authorizaton</H4>
+          <H4>&#x2022 Ready to go database system</H4>
+          <H4>&#x2022 User login, signup, and settings</H4>           
+</section>
 {% endif %}
 </div>
 </div>

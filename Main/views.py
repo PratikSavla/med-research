@@ -26,8 +26,17 @@ np.set_printoptions(suppress=True)
 # determined by the first position in the shape tuple, in this case 1.
 
 def get_predictions():
-    path = default_storage.open('tmp/'+"img.jpg")
-# Replace this with the path to your image
+    np.set_printoptions(suppress=True)
+
+# Load the model
+    model = tensorflow.keras.models.load_model('mobilenet.h5')
+    path = default_storage.open('static/tmp/'+"img.jpg")
+    # Create the array of the right shape to feed into the keras model
+    # The 'length' or number of images you can put into the array is
+    # determined by the first position in the shape tuple, in this case 1.
+    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+
+    # Replace this with the path to your image
     image = Image.open(path)
 
     #resize the image to a 224x224 with the same strategy as in TM2:
@@ -39,13 +48,11 @@ def get_predictions():
     image_array = np.asarray(image)
 
     # display the resized image
-    image.show()
+    #image.show()
 
     # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
-
-    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
     # Load the image into the array
     data[0] = normalized_image_array
 
@@ -57,17 +64,25 @@ def get_predictions():
 # Create your views here.
 def homepage(request):
     if request.method == 'POST':
-        img = request.FILES['file']
+        try:
+            img = request.FILES['file']
 
-        with default_storage.open('static/tmp/'+"img.jpg", 'wb+') as dest:
-            for chunk in img.chunks():
-                dest.write(chunk)
+            with default_storage.open('static/tmp/'+"img.jpg", 'wb+') as dest:
+                for chunk in img.chunks():
+                    dest.write(chunk)
 
-        #output = get_predictions()
-        output = "Test Name"
-        return render(request = request,
-                  template_name='Main/home.html',
-                  context = {"tutorials":"Testing","output":True, "result":output})
+            output = get_predictions()
+            acc = str(output[0][output[0].argmax()]*100)
+            output = str(['Optetrak','Maxx Freedom Knee','Smith and Nephew - Legion',
+                          'Stryker - NRG','Zimmer - LPS','Zimmer_Persona_(SIIMS)'][output[0].argmax()])
+            # output = "Test Name"
+            return render(request = request,
+                      template_name='Main/home.html',
+                      context = {"tutorials":"Testing","output":True, "result":output, "acc":acc})
+        except:
+            return render(request = request,
+                template_name='Main/home.html',
+                     context = {"tutorials":"Testing","output":False})
 
     return render(request = request,
                   template_name='Main/home.html',

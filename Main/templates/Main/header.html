@@ -2,7 +2,8 @@
 
 <head>
 	 {% load static %}
-            <link rel="stylesheet" href="{% static "main/css/header.css" %}">
+            <link rel="stylesheet" href="{% static 'main/css/header.css' %}">
+            <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
     <!-- Compiled and minified CSS -->
      <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -14,11 +15,11 @@
 </head>
 
 
-<body class="body teal accent-1">
+<body class="body deep-purple lighten-4">
 
   <nav>
-    <div class="nav-wrapper  teal darken-3">
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <div class="nav-wrapper black">
+      <ul id="nav-mobile" class="right hide-on-med-and-down black-text">
         {% include 'Main/includes/navbaritems.html' %}
       </ul>
     </div>
@@ -31,7 +32,7 @@
     {% endblock %}
   </div>
 </body>
-  <footer class="page-footer teal darken-2">
+  <footer class="page-footer black">
           <div class="footer-copyright">
             <div class="container">
             © 2020 Copyright Pratik Savla
